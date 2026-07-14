@@ -42,3 +42,7 @@ src: ./pages/01-intro.md
 ---
 src: ./pages/02-method.md
 ---
+
+---
+src: ./pages/03-result.md
+---

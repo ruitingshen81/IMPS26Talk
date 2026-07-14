@@ -318,7 +318,3 @@ token embeddings for two sequences
 </div>
 
  
-
----
-layout: center
----
