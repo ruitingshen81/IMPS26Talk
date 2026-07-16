@@ -46,3 +46,7 @@ src: ./pages/02-method.md
 ---
 src: ./pages/03-result.md
 ---
+
+---
+src: ./pages/04-futuredirection.md
+---

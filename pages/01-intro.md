@@ -1,38 +1,54 @@
 ---
-layout: default
+layout: two-cols
+layoutClass: "gap-8 grid-cols-[0.42fr_0.58fr]"
 ---
 
-# Existing Approaches
+![A test-taking process represented as a complex clickstream](/images/test-taking-process.png){width=88%}
 
-<v-clicks depth="2">
+::right::
 
-1. **Supervised sequence prediction**
-   - Learn sequence representations optimized for predicting task outcomes.
-   - Examples: RNNs, LSTMs, GRUs over action and time sequences.
+<v-clicks depth="1" class="text-sm leading-5">
 
-2. **Latent process-state models**
-   - Represent clickstream behavior as transitions among discrete latent states.
-   - Examples: HMMs, latent transition models, sequence-oriented latent classes.
+- **Supervised outcome prediction**  
+  Use process data to predict accuracy, scores, completion, or other external outcomes.
+  *Examples: [Chen et al. (2019)](https://doi.org/10.3389/fpsyg.2019.00486); [Chen, Lu, & Cui (2024)](https://doi.org/10.1007/s10639-023-12389-x).*
 
-3. **Feature extraction and sequence compression**
-   - Convert irregular clickstreams into fixed-dimensional summaries.
-   - Examples: handcrafted process features, OSS/MDS features, RNN autoencoders.
+- **Unsupervised behavioral-pattern exploration**  
+  Uncovering recurring states, test taking strategies, or response patterns within the process data.
+  *Examples: [Ulitzsch, He, & Pohl (2022)](https://doi.org/10.3102/10769986211010467); [He, Borgonovi, & Paccagnella (2021)](https://doi.org/10.1016/j.compedu.2021.104170).*
 
 </v-clicks>
 
+<div v-click class="mt-5 text-[0.58rem] leading-4">
+
+| student_id | seq_len | event_sequence |
+|---|---:|---|
+| S001 | 5 | `Q1:view@0, Q1:answer@12, Q2:view@15, Q3:view@41, Q3:submit@45` |
+| S002 | 11 | `Q1:view@0, Q2:view@3, Q1:view@9, Q1:view@9, ... Q4:submit@140` |
+| S003 | 3 | `Q1:view@0, Q1:idle@300, Q1:submit@301` |
+| ... | ...| `Q1:view@0, null@2` |
+
+</div>
+
 ---
 
-# The Gap
+# Four Broad Strategies for Representing Clickstreams
 
-<v-clicks>
+Conventional statistical analyses generally require each respondent to have the same set of dimensions.
 
-- Clickstream sequences are irregular, high-dimensional, and context dependent.
-- Existing methods often summarize behavior into discrete states, handcrafted features, or prediction-targeted representations.
-- These approaches can lose sequence-wide contextual information.
-- We need a representation-learning approach that preserves action-level context while producing scalable respondent-level embeddings.
+1. **Engineered features**  
+   Summarize time, action counts, transitions, n-grams, or task-specific behaviors.
 
-</v-clicks>
+2. **Sequence similarity or distance**  
+   Compare whole sequences using edit distance, longest common subsequence, or optimal matching; analyze the resulting distances directly or through MDS.
 
+3. **Latent process representations**  
+   Describe behavior using a bounded set of latent states, classes, or transition parameters.
+
+4. **Learned sequence representations**  
+   Use autoencoders, RNNs, or transformers to learn fixed-dimensional embeddings.
+
+> **The gap is not a lack of ways to reduce the data. The challenge is learning representations that preserve contextual detail while remaining reusable across analytic goals.**
 
 ---
 layout: center

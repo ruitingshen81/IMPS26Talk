@@ -74,3 +74,22 @@ layoutClass: gap-2
 ![Sequences in cluster 2](/images/combined_seq_last_token2.png){width=90%}
 
 
+
+---
+layout: two-cols-header
+layoutClass: gap-2
+---
+
+# Token level: Token distance in the vector space
+
+::left::
+
+![token distance](/images/token_embedding_distance_heatmap.png){width=125%}
+
+
+::right::
+
+- **Scratchwork actions form the clearest neighborhood:** Clear Scratchwork (`CS`) is close to Scratchwork Draw Mode On (`SDO`), Draw (`D`), and Scratchwork Mode On (`SON`).
+- **Other close pairs reflect process transitions:** Exit Item–Next (`EXI`–`N`) and Click Progress Navigator–Enter Item (`CPN`–`ENI`).
+- **The nearest pair is First Text Change–Math Keypress** (`FTC`–`MK`).
+- Overall, the embeddings capture **shared sequence context**, not only literal action categories.
