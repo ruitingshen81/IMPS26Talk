@@ -50,3 +50,14 @@ src: ./pages/03-result.md
 ---
 src: ./pages/04-futuredirection.md
 ---
+
+---
+layout: center
+class: text-center
+---
+
+# Thank You
+
+<div class="mt-6 text-xl text-[#1f6f78]">
+  Contact: rs8422@nyu.edu
+</div>

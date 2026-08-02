@@ -45,7 +45,10 @@ Conventional statistical analyses generally require each respondent to have the 
 3. **Learned sequence representations from sequence models**  
    Use autoencoders, RNNs, or LSTMs to learn fixed-dimensional embeddings.
 
-> <span class="text-xl font-bold text-[#9f331d]">The gap :</span> using a learned model does not automatically solve the representation problem. The remaining challenge is to learn embeddings that preserve contextual information from the full sequence while also being reusable across different analytic goals.
+> <span style="font-size: 1.5rem; line-height: 1.45;">
+>   <span class="font-bold text-[#9f331d]">The gap:</span>
+>   using a learned model does not automatically solve the representation problem. The remaining challenge is to learn embeddings that preserve contextual information from the full sequence while also being reusable across different analytic goals.
+> </span>
 
 ---
 layout: center
@@ -207,8 +210,8 @@ $$h_t=f(x_t,h_{t-1})$$
 ### Attention mechanism
 
 1. Each action can directly evaluate which earlier actions are relevant
-2 . The model creates **query**, **key**, and **value** vectors.
-3. Query–key similarity determines which earlier actions matter:
+2. The model creates **query**, **key**, and **value** vectors for each token/action.
+3. Query–key similarity determines the attention weights (which earlier actions matter):
 
 $$\alpha_{ij}=\operatorname{softmax}\left(\frac{q_i k_j^\top}{\sqrt d}\right)$$
 

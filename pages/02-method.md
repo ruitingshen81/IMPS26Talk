@@ -15,7 +15,7 @@ layoutClass: gap-14
 <v-clicks>
 
 - Raw clickstream data are timestamped actions for each respondent.
-- Each row records who acted, which item they were working on, when the action happened, and the observable action type.
+- Each row records for each respondent, which item they were working on, when the action happened, and the observable action type.
 - These raw records are irregularly spaced in time and vary in length across respondents.
 
 </v-clicks>
@@ -36,7 +36,7 @@ layoutClass: gap-14
 </div>
 
 <div class="mt-5 text-base leading-4 text-[#1f6f78] font-semibold">
-Raw form: respondent x item x timestamped Observable action
+Data source: 2017 NAEP Grade ​4 and Grade 8 Mathematics Assessment Public Process Data
 </div>
 
 ---
@@ -88,7 +88,7 @@ flowchart LR
   <div> $R_i$: `ENI, NO, EXI` </div>
 </div>
 
-<div class="mt-6 text-left text-sm leading-6 text-[#D0CEBA]">
+<div class="mt-6 text-left text-sm leading-6 text-[#2E294E]">
 
 - Each action code becomes one token
 - So now we have tokenized process sequences for all respondent for a single item
@@ -126,12 +126,12 @@ Sequence: `ENI` - `D` - `OC` - `NO` - `EXI`
 
 </div>
 
-<div class="text-base leading-7 text-[#D0CEBA]">
+<div class="text-base leading-7 text-[#2E294E]">
 
-- Each action token is represented as a numeric vector.
-- The vector is the token's position in embedding space.
-- We hypothesize that action tokens with similar learned meanings can move closer together during training.
+- Map each action token to a numeric vector (16 dimensions in our model).
+- The vector is the token's location in embedding space.
 - Before training, these embedding values are randomly initialized.
+- Actions that occur in similar sequence contexts may develop more similar representations.
 
 </div>
 
@@ -148,13 +148,14 @@ layoutClass: gap-10
 
 <v-clicks>
 
-- On top of the action tokens, add `SOS` and `EOS` tokens, then shift the sequence by one position.
-- Add positional encoding so the model can distinguish the same action token at different time steps.
-- Combine token embeddings with positional encodings before the sequence enters the decoder.
-- Predict each **next action token** from previous action tokens.
-- Use a causal mask so position *t* cannot attend to future actions.
-- Architecture: token embedding dimension **16**, **2** decoder layers, **4** attention heads, feed-forward dimension **128**.
-- Ignore padding positions in the cross-entropy loss.
+- Add `SOS` and `EOS` tokens to mark the beginning and end of each action sequence.
+- Add `PAD` tokens to shorter sequences so all sequences within a batch have the same length.
+- Create input and target sequences offset by one position for **next-action prediction**.
+- Add positional encodings so the model can distinguish the same action token at different time steps.
+- Use a causal mask so position *t* can attend only to itself and earlier actions.
+- Predict each **next action token** from the preceding action tokens.
+- Architecture: token embedding dimension **16**, **2** decoder layers, **4** attention heads, and feed-forward dimension **128**.
+- Ignore `PAD` positions when calculating the cross-entropy loss.
 
 </v-clicks>
 
@@ -197,7 +198,7 @@ layout: default
 
 <h1 class="text-2xl leading-tight">Trained Embedding Representations</h1>
 
-<div class="mt-5 text-sm leading-6 text-[#D0CEBA]">
+<div class="mt-5 text-sm leading-6 text-[#1E1B18]">
 After training, each respondent's token sequence can be represented by learned token vectors.
 </div>
 
@@ -207,7 +208,7 @@ After training, each respondent's token sequence can be represented by learned t
 
 <div class="mb-2 text-sm font-semibold text-[#1f6f78]">Example 1: longer response process</div>
 
-<div class="mb-3 font-mono text-xs text-[#D0CEBA]">
+<div class="mb-3 font-mono text-xs text-[#1E1B18]">
 R1: `ENI` -> `D` -> `OC` -> `NO` -> `EXI`
 </div>
 
@@ -229,7 +230,7 @@ R1: `ENI` -> `D` -> `OC` -> `NO` -> `EXI`
 
 <div class="mb-2 text-sm font-semibold text-[#1f6f78]">Example 2: A shorter response process</div>
 
-<div class="mb-3 font-mono text-xs text-[#D0CEBA]">
+<div class="mb-3 font-mono text-xs text-[#1E1B18]">
 R2: `ENI` -> `NO` -> `EXI`
 </div>
 
