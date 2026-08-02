@@ -11,7 +11,7 @@ transition: slide-left
 comark: true
 duration: 35min
 layout: cover
-background: /images/nyu-background.jpeg
+background: ./images/nyu-background.jpeg
 class: text-white
 ---
 
