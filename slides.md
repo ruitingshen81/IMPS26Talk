@@ -11,9 +11,10 @@ transition: slide-left
 comark: true
 duration: 35min
 layout: cover
-background: ./images/nyu-background.jpeg
 class: text-white
 ---
+
+<TitleBackground />
 
 ## Context-Aware Modeling of Test-Taking Clickstream Data Using Transformer Models 
 
